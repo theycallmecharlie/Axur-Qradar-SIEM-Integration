@@ -52,7 +52,7 @@ class Search:
                 {
                     "fieldName": "current.open.date",
                     "values": [
-                        f"{int(time.time() - int(172800)) * 1000}"
+                        f"{int(time.time() - int(60)) * 1000}"
                     ],
                     "operation": "GREATER_THAN_OR_EQUAL"
                 }
