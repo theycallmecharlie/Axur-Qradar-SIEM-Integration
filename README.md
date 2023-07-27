@@ -1,1 +1,0 @@
-# Axur Qradar SIEM Integration
