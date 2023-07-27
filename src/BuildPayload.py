@@ -49,39 +49,42 @@ class BuildPayload:
         prefix = f"LEEF:2.0|Axur One|Digital Protection|1.0|eventid"
         payload = '\t'.join(payload)
         payload = f"{prefix}|{payload}"
-        event_ids = ["code-secret-leak",
-                     "corporate-credential-leak",
-                     "database-exposure",
-                     "other-sensitive-data",
-                     "dw-activity",
-                     "data-exposure-website",
-                     "data-sale-website",
-                     "fraud-tool-scheme-website",
-                     "suspicious-activity-website",
-                     "data-exposure-message",
-                     "data-sale-message",
-                     "fraud-tool-scheme-message",
-                     "suspicious-activity-message",
-                     "infrastructure-exposure",
-                     "fake-mobile-app",
-                     "fake-social-media-profile",
-                     "fraudulent-brand-use",
-                     "malware",
-                     "paid-search",
-                     "phishing",
-                     "similar-domain-name",
-                     "unauthorized-distribution",
-                     "unauthorized-sale",
-                     "executive-card-leak",
-                     "executive-credential-leak",
-                     "executive-fake-social-media-profile",
-                     "executive-personalinfo-leak"]
-
-        eventid = next(ticket_type for ticket_type in ticket["detection"]["fields"] if ticket_type["value"] in event_ids)
+        event_ids = [
+            "code-secret-leak",
+            "corporate-credential-leak",
+            "database-exposure",
+            "other-sensitive-data",
+            "dw-activity",
+            "data-exposure-website",
+            "data-sale-website",
+            "fraud-tool-scheme-website",
+            "suspicious-activity-website",
+            "data-exposure-message",
+            "data-sale-message",
+            "fraud-tool-scheme-message",
+            "suspicious-activity-message",
+            "infrastructure-exposure",
+            "fake-mobile-app",
+            "fake-social-media-profile",
+            "fraudulent-brand-use",
+            "malware",
+            "paid-search",
+            "phishing",
+            "similar-domain-name",
+            "unauthorized-distribution",
+            "unauthorized-sale",
+            "executive-card-leak",
+            "executive-credential-leak",
+            "executive-fake-social-media-profile",
+            "executive-personalinfo-leak"
+        ]
+        eventid = next(
+            ticket_type for ticket_type in ticket["detection"]["fields"] if ticket_type["value"] in event_ids)
         payload = payload.replace("eventid", eventid["value"])
         print(payload)
-        my_logger = logging.getLogger('MyLogger')
-        my_logger.setLevel(logging.INFO)
-        handler = logging.handlers.SocketHandler('<destination_ip>', 514)
-        my_logger.addHandler(handler)
-        my_logger.info(payload)
+        events = logging.getLogger("Axurpayloads")
+        events.setLevel(logging.INFO)
+        handler = logging.handlers.SocketHandler("<destination_ip>", 514)
+        events.addHandler(handler)
+        events.info(payload)
+        events.removeHandler(handler)
