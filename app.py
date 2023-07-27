@@ -1,12 +1,13 @@
 from src.Auth import Authentication
 from src.Search import Search
 from src.BuildPayload import Ticket
-
 from dotenv import dotenv_values
+
 import os
+import argparse
 
 global URL
-URL = "https://api.axur.com/gateway/1.0/api"
+# URL = "https://api.axur.com/gateway/1.0/api"
 CONFIG = dict(dotenv_values())
 MAIL = CONFIG['MAIL']
 PASSWORD = CONFIG['PW']
